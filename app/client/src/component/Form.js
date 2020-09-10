@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import M from 'materialize-css';
+import Details from './Details';
 
 const allDates = [
   {
@@ -152,6 +153,11 @@ const allDates = [
 export default function Form() {
   const [dateId, setDateId] = useState(allDates[0].id);
   const [dateName, setDateName] = useState(allDates[0].name);
+  const [lancamentos, setLancamentos] = useState(0);
+  const [receitas, setReceitas] = useState(0);
+  const [despesas, setDespesas] = useState(0);
+  const [saldo, setSaldo] = useState(0);
+  
 
   //Ativando o javascript do materialize
 
@@ -189,7 +195,8 @@ export default function Form() {
             <input
               id="Lancamentos:"
               type="number"
-              value="0" />
+              value={lancamentos}
+              readOnly={true} />
             <label className="active" htmlFor="Lancamentos">Lançamentos:</label>
           </div>
 
@@ -197,7 +204,8 @@ export default function Form() {
             <input
               id="Receitas:"
               type="number"
-              value="0" />
+              value={receitas}
+              readOnly />
             <label className="active" htmlFor="Receitas">Receitas:</label>
           </div>
 
@@ -205,7 +213,8 @@ export default function Form() {
             <input
               id="Despesas:"
               type="number"
-              value="0" />
+              value={despesas}
+              readOnly />
             <label className="active" htmlFor="Despesas">Despesas:</label>
           </div>
 
@@ -213,7 +222,8 @@ export default function Form() {
             <input
               id="Saldo:"
               type="number"
-              value="0" />
+              value={saldo}
+              readOnly />
             <label className="active" htmlFor="Saldo">Saldo:</label>
           </div>
         </div>
@@ -229,6 +239,10 @@ export default function Form() {
           </div>
         </div>
 
+      </div>
+
+      <div>
+        
       </div>
     </div>
   );
