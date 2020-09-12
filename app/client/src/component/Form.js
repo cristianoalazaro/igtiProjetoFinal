@@ -205,11 +205,44 @@ export default function Form() {
     //const filteredDatas = getTransactionFrom(newDate).then(console.log(filteredDatas));
   }
 
-  const array = Object.assign([], datas.data);
+  let array = Object.assign([], datas.data);
+
+  const getReceitas = () => {
+    let receita = 0;
+    array.forEach(item => {
+      if (item.type === '+') {
+        receita += parseInt(item.value);
+      }
+    });
+    return receita;
+  }
+
+  const getDespesas = () => {
+    let despesa = 0;
+    array.forEach(item => {
+      if (item.type === '-') {
+        despesa += parseInt(item.value);
+      }
+    });
+    return despesa;
+  }  
+
+  const getSaldo = () => {
+    return getReceitas()-getDespesas();
+  }
+
+  const filtroHandleChange = (event) => {
+    const key = event.target.value;
+    let arrayAuxiliar = array.filter((item)=>{return item.description.toLowerCase().includes(key.toLowerCase())});
+    console.log(arrayAuxiliar);
+ }
+
+
 
   return (
     <div>
       <div>
+
         <select className="browser-default" value={dateId} onChange={handleDateChange}>
           {allDates.map((date) => {
             const { id, name } = date;
@@ -236,7 +269,7 @@ export default function Form() {
             <input
               id="Receitas:"
               type="number"
-              value={receitas}
+              value={getReceitas()}
               readOnly />
             <label className="active" htmlFor="Receitas">Receitas:</label>
           </div>
@@ -245,7 +278,7 @@ export default function Form() {
             <input
               id="Despesas:"
               type="number"
-              value={despesas}
+              value={getDespesas()}
               readOnly />
             <label className="active" htmlFor="Despesas">Despesas:</label>
           </div>
@@ -254,7 +287,7 @@ export default function Form() {
             <input
               id="Saldo:"
               type="number"
-              value={saldo}
+              value={getSaldo()}
               readOnly />
             <label className="active" htmlFor="Saldo">Saldo:</label>
           </div>
@@ -267,7 +300,7 @@ export default function Form() {
           <div className="input-field col s6">
             <input
               id="filtro"
-              placeholder="Filtro" />
+              placeholder="Filtro" onChange={filtroHandleChange} />
           </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function Details({ array }) {
-    console.log(array)
 
     return (
         <div>
